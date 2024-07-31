@@ -48,7 +48,6 @@ public class PetService {
     }
 
 
-
     public void deletePet(Long id) {
         if (!petRepository.existsById(id)) {
             throw new IllegalArgumentException("Pet with ID " + id + " does not exist.");
