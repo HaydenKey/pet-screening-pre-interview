@@ -27,7 +27,8 @@ public class Pet {
     @JoinColumn(name = "pet_owner_id", nullable = false)
     private PetOwner petOwner;
 
-    public Pet() {}
+    public Pet() {
+    }
 
     public Pet(String name, double weight, String breed, boolean vaccinated, int trainingLevel, PetOwner petOwner) {
         this.name = name;
