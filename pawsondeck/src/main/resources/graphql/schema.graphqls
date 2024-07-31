@@ -1,0 +1,64 @@
+type Pet {
+    id: ID!
+    name: String!
+    weight: Float!
+    breed: String!
+    vaccinated: Boolean!
+    trainingLevel: Int!
+    petOwner: PetOwner!
+}
+
+type PetOwner {
+    id: ID!
+    name: String!
+    contactInformation: String!
+    pets: [Pet!]!
+}
+
+type Query {
+    pets: [Pet!]!
+    pet(id: ID!): Pet
+    petsByWeight(weight: Float!): [Pet!]!
+    vaccinatedPets: [Pet!]!
+    nonPoodles: [Pet!]!
+    petsWithTrainingLevel(level: Int!): [Pet!]!
+    petOwners: [PetOwner!]!
+    petOwner(id: ID!): PetOwner
+    isPetEligibleForRental(petId: ID!): Boolean!
+}
+
+type Mutation {
+    addPet(
+        name: String!,
+        weight: Float!,
+        breed: String!,
+        vaccinated: Boolean!,
+        trainingLevel: Int!,
+        petOwnerId: ID!
+    ): Pet!
+
+    updatePet(
+        id: ID!,
+        name: String,
+        weight: Float,
+        breed: String,
+        vaccinated: Boolean,
+        trainingLevel: Int,
+        petOwnerId: ID
+    ): Pet!
+
+    deletePet(id: ID!): Boolean!
+
+    addPetOwner(
+        name: String!,
+        contactInformation: String!
+    ): PetOwner!
+
+    updatePetOwner(
+        id: ID!,
+        name: String,
+        contactInformation: String
+    ): PetOwner!
+
+    deletePetOwner(id: ID!): Boolean!
+}
