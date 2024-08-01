@@ -54,7 +54,7 @@ class PetOwnerServiceTest {
     void testGetAllPetOwners() {
         when(petOwnerRepository.findAll()).thenReturn(Arrays.asList(petOwner1, petOwner2));
 
-        List<PetOwner> petOwners = petOwnerService.petOwners();
+        List<PetOwner> petOwners = petOwnerService.getPetOwners();
 
         assertNotNull(petOwners);
         assertEquals(2, petOwners.size());

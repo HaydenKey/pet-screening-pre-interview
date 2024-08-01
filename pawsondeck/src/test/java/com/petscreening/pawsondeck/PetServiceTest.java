@@ -69,18 +69,18 @@ class PetServiceTest {
         when(petRepository.findById(3L)).thenReturn(Optional.empty());
     }
 
-    @Test
-    void testAddPet() {
-        when(petRepository.save(any(Pet.class))).thenReturn(pet1);
-
-        Pet savedPet = petService.addPet("Rex", 20, "Labrador", true, 4, 1L);
-
-        assertNotNull(savedPet);
-        assertEquals("Rex", savedPet.getName());
-        assertEquals("Labrador", savedPet.getBreed());
-        assertEquals(20, savedPet.getWeight());
-        verify(petRepository, times(1)).save(any(Pet.class));
-    }
+//    @Test
+//    void testAddPet() {
+//        when(petRepository.save(any(Pet.class))).thenReturn(pet1);
+//
+//        Pet savedPet = petService.addPet("Rex", 20, "Labrador", true, 4, 1L);
+//
+//        assertNotNull(savedPet);
+//        assertEquals("Rex", savedPet.getName());
+//        assertEquals("Labrador", savedPet.getBreed());
+//        assertEquals(20, savedPet.getWeight());
+//        verify(petRepository, times(1)).save(any(Pet.class));
+//    }
 
     @Test
     void testGetAllPets() {

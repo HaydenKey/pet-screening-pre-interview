@@ -5,21 +5,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.petscreening.pawsondeck.model.PetOwner;
 import com.petscreening.pawsondeck.service.PetOwnerService;
-import com.petscreening.pawsondeck.resolver.PetOwnerResolver;
-
 
 
 class PetOwnerResolverTest {
@@ -50,7 +47,7 @@ class PetOwnerResolverTest {
 
     @Test
     void testGetAllPetOwners() {
-        when(petOwnerService.petOwners()).thenReturn(Arrays.asList(petOwner1, petOwner2));
+        when(petOwnerService.getPetOwners()).thenReturn(Arrays.asList(petOwner1, petOwner2));
 
         List<PetOwner> petOwners = petOwnerResolver.petOwners();
         assertEquals(2, petOwners.size());

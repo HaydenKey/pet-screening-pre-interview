@@ -1,15 +1,21 @@
 package com.petscreening.pawsondeck.service;
 
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.petscreening.pawsondeck.model.Pet;
 import com.petscreening.pawsondeck.model.PetOwner;
 import com.petscreening.pawsondeck.repository.PetRepository;
 import com.petscreening.pawsondeck.repository.PetOwnerRepository;
+import org.springframework.validation.annotation.Validated;
+
 import java.util.Optional;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
+@Validated
 public class PetService {
     @Autowired
     private PetRepository petRepository;
@@ -20,26 +26,8 @@ public class PetService {
         return petRepository.findAll();
     }
 
-    public Pet addPet(String name, double weight, String breed, boolean vaccinated, int trainingLevel, Long petOwnerId) {
-        if (trainingLevel < 1 || trainingLevel > 10) {
-            throw new IllegalArgumentException("Training level must be an integer between 1 and 10");
-        }
-
-        Optional<PetOwner> petOwnerOptional = petOwnerRepository.findById(petOwnerId);
-        if (!petOwnerOptional.isPresent()) {
-            throw new IllegalArgumentException("PetOwner with ID " + petOwnerId + " does not exist.");
-        }
-
-        PetOwner petOwner = petOwnerOptional.get();
-
-        Pet pet = new Pet();
-        pet.setName(name);
-        pet.setWeight(weight);
-        pet.setBreed(breed);
-        pet.setVaccinated(vaccinated);
-        pet.setTrainingLevel(trainingLevel);
-        pet.setPetOwner(petOwner);
-
+    @Transactional
+    public Pet addPet(Pet pet) {
         return petRepository.save(pet);
     }
 

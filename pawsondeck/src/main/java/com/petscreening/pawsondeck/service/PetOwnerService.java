@@ -1,10 +1,12 @@
 package com.petscreening.pawsondeck.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.Valid;
+
 import java.util.List;
 
 import com.petscreening.pawsondeck.model.PetOwner;
@@ -17,12 +19,13 @@ public class PetOwnerService {
     @Autowired
     private PetOwnerRepository petOwnerRepository;
 
+    @Transactional
     public PetOwner addPetOwner(@Valid PetOwner petOwner) {
         return petOwnerRepository.save(petOwner);
     }
 
 
-    public List<PetOwner> petOwners() {
+    public List<PetOwner> getPetOwners() {
         return petOwnerRepository.findAll();
     }
 
@@ -30,6 +33,7 @@ public class PetOwnerService {
         return petOwnerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Pet Owner not found"));
     }
 
+    @Transactional
     public void deletePetOwner(Long id) {
         petOwnerRepository.deleteById(id);
     }
